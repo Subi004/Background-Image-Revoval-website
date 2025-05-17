@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Background Remover</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            font-size: 36px;
+        }
+        .upload-section {
+            margin: 20px 0;
+        }
+        input[type="file"] {
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin: 20px;
+            font-weight: bold;
+        }
+        .image-section {
+            margin-top: 30px;
+        }
+        .image-section img {
+            max-width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Background Remover</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-section">
+            <input type="file" name="image" accept="image/*" required>
+        </div>
+        <button type="submit">Remove Background</button>
+    </form>
+
+    {% if error %}
+        <div class="error">Error: {{ error }}</div>
+    {% endif %}
+
+    {% if input_img_data %}
+        <div class="image-section">
+            <h2>Original Image</h2>
+            <img src="data:image/png;base64,{{ input_img_data }}">
+        </div>
+    {% endif %}
+
+    {% if result_img_data %}
+        <div class="image-section">
+            <h2>Image Without Background</h2>
+            <img src="data:image/png;base64,{{ result_img_data }}">
+        </div>
+    {% endif %}
+</body>
+</html>
